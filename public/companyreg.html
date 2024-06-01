@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #efeee5;
+            color: #274546;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #274546;
+        }
+
+        .container form {
+            display: grid;
+            grid-gap: 15px;
+        }
+
+        .container input[type="text"],
+        .container input[type="password"],
+        .container input[type="email"],
+        .container input[type="number"],
+        .container select {
+            width: calc(100% - 10px); /* Adjusted to account for grid gap */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 1rem;
+            color: #274546;
+        }
+
+        .container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #274546;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .container input[type="submit"]:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .container .grid-item {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 10px;
+        }
+
+        @media screen and (min-width: 600px) {
+            .container {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Company Registration Form</h2>
+        <form action="/company" method="POST" id="registrationForm">
+            <div class="grid-item">
+                <input type="text" id="companyName" name="companyName" placeholder="Company Name" required>
+            </div>
+            <div class="grid-item">
+                <input type="text" id="contactPersonName" name="contactPersonName" placeholder="Contact Person Name" required>
+            </div>
+            <input type="text" id="address" name="address" placeholder="Address" required>
+            <div class="grid-item">
+                <input type="text" id="city" name="city" placeholder="City" required>
+                <input type="text" id="state" name="state" placeholder="State" required>
+            </div>
+            <input type="number" id="pincode" name="pincode" placeholder="Pincode" required>
+            <input type="number" id="mobile" name="mobile" placeholder="Mobile Number" required>
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+            <input type="text" id="companyWebsite" name="companyWebsite" placeholder="Company's Website" required>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            <input type="submit" value="Register" id="submit" disabled>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registrationForm');
+            const inputs = form.querySelectorAll('input, select');
+            const submitButton = form.querySelector('input[type="submit"]');
+
+            inputs.forEach(input => {
+                input.addEventListener('input', function () {
+                    const allFilled = [...inputs].every(input => input.value.trim() !== '');
+                    submitButton.disabled = !allFilled;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

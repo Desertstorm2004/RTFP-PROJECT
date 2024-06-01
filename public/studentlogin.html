@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Campus Selection System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fbf8f3;
+            color: #333;
+        }
+
+        header {
+            background-color: #274546;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #efeee5;
+        }
+
+        header nav {
+            margin-top: 20px;
+        }
+
+        header nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            background-color: #274546;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .menu-toggle:focus {
+            outline: none;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+
+        aside {
+            width: 25%;
+            background-color: #274546;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        aside .welcome-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        aside .clients img {
+            width: 50%;
+        }
+
+        aside .side-nav {
+            display: flex;
+            flex-direction: column;
+        }
+
+        aside .side-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #333;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        aside .side-nav a:hover {
+            background-color: #1ABC9C;
+        }
+
+        section.content {
+            width: 75%;
+            padding: 20px;
+            background-color: #efeee5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-container h2 {
+            color: #274546;
+        }
+
+        .search-container input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+
+        .search-container button {
+            background-color: #274546;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .search-container button:hover {
+            background-color: #1ABC9C;
+        }
+
+        .job-list {
+            margin-bottom: 20px;
+        }
+
+        .job-item {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-item h3 {
+            color: #274546;
+            margin-top: 0;
+        }
+
+        .job-item p {
+            margin: 5px 0;
+        }
+
+        .job-item button {
+            background-color: #274546;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .job-item button:hover {
+            background-color: #1ABC9C;
+        }
+
+        .profile-section {
+            margin-bottom: 20px;
+        }
+
+        .profile-section h2 {
+            color: #274546;
+        }
+
+        .profile-section button {
+            background-color: #274546;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .profile-section button:hover {
+            background-color: #1ABC9C;
+        }
+
+        .applied-jobs {
+            margin-bottom: 20px;
+        }
+
+        .applied-jobs h2 {
+            color: #274546;
+        }
+
+        .applied-jobs ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .applied-jobs li {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .applied-jobs li h3 {
+            color: #274546;
+            margin-top: 0;
+        }
+
+        .applied-jobs li p {
+            margin: 5px 0;
+        }
+
+        footer {
+            background-color: #274546;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            aside {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            section.content {
+                width: 100%;
+            }
+
+            .menu-toggle {
+                display: inline-block;
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 20px;
+            }
+
+            header nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            header nav ul {
+                display: flex;
+                flex-direction: column;
+            }
+
+            header nav a {
+                margin: 10px 0;
+            }
+
+            .menu-toggle.active+nav {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #274546;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>College Campus Placement System</h1>
+        <button class="menu-toggle">Menu</button>
+        
+
+    </header>
+
+    <main>
+        <aside>
+            <div class="welcome-section">
+                <h2>Welcome</h2>
+                <div class="clients">
+                    <img src="./images/std.png" alt="student">
+                </div>
+            </div>
+            <nav class="side-nav">
+                <a href="home.html">HOME</a>
+                <a href="#">Applied Job</a>
+                <a href="about.html">ABOUT US</a>
+                <a href="contact.html">CONTACT US</a>
+                <a href="student.html">LogOut</a>
+            </nav>
+        </aside>
+
+        <section class="content">
+            <div class="search-container">
+                <h2>Search Jobs</h2>
+                <input type="text" id="searchSkill" placeholder="Search by skill">
+                <button onclick="searchJobs()">Search</button>
+            </div>
+
+            <div class="job-list" id="jobList">
+                <!-- Jobs will be displayed here -->
+            </div>
+
+            <div class="profile-section">
+                <h2>Welcome</h2>
+                <button id="viewProfile">View Profile</button>
+            </div>
+
+            <div class="applied-jobs">
+                <h2>Applied Jobs</h2>
+                <ul id="appliedJobsList">
+                    <!-- Applied jobs will be displayed here -->
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>All the Rights Reserved @OCSS</p>
+    </footer>
+
+    <script>
+        async function applyForJob(jobId) {
+            const response = await fetch(`/api/applyjob`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ jobId })
+            });
+
+            if (response.ok) {
+                alert('Successfully applied for the job!');
+                const jobResponse = await fetch(`/api/job/${jobId}`);
+                if (jobResponse.ok) {
+                    const job = await jobResponse.json();
+                    displayAppliedJob(job);
+                } else {
+                    console.error('Failed to fetch job details for display');
+                }
+            } else {
+                alert('Failed to apply for the job');
+            }
+        }
+
+        function displayAppliedJob(job) {
+            const appliedJobsList = document.getElementById('appliedJobsList');
+            const jobItem = document.createElement('li');
+            jobItem.innerHTML = `
+                <h3>CompanyName: ${job.companyName}</h3>
+                <p>Position: ${job.role}</p>
+                <p>Location: ${job.jobLocation}</p>
+                <p>Salary: ${job.salary}</p>
+                <p>Skill: ${job.requiredSkill}</p>
+            `;
+            appliedJobsList.appendChild(jobItem);
+        }
+
+        async function searchJobs() {
+            const skill = document.getElementById('searchSkill').value;
+            const response = await fetch(`/api/jobs?skill=${skill}`);
+            const jobs = await response.json();
+            const jobList = document.getElementById('jobList');
+            jobList.innerHTML = '';
+
+            jobs.forEach(job => {
+                const jobItem = document.createElement('div');
+                jobItem.className = 'job-item';
+                jobItem.innerHTML = `
+                    <h3>CompanyName: ${job.companyName}</h3>
+                    <p>Position: ${job.role}</p>
+                    <p>Location: ${job.jobLocation}</p>
+                    <p>Salary: ${job.salary}</p>
+                    <p>Skill: ${job.requiredSkill}</p>
+                    <button onclick="applyForJob('${job._id}')">Apply</button>
+                `;
+                jobList.appendChild(jobItem);
+            });
+
+        }
+
+        document.getElementById('viewProfile').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/profile');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const profile = await response.json();
+                displayProfile(profile);
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+
+        });
+
+        function displayProfile(profile) {
+            const profileSection = document.querySelector('.profile-section');
+            profileSection.innerHTML = `
+                <div>
+                    <button id="closeProfile" onclick="closeProfile()">Close</button>
+                    <h2>Profile Details</h2>
+                    <p>UserName: ${profile.username}</p>
+                    <p>Date of Birth: ${profile.dob}</p>
+                    <p>Gender: ${profile.gender}</p>
+                    <p>Mobile: ${profile.mobile}</p>
+                    <p>Email: ${profile.email}</p>
+                    <p>Roll No: ${profile.rollNo}</p>
+                    <p>Address: ${profile.address}</p>
+                    <p>City: ${profile.city}</p>
+                    <p>State: ${profile.state}</p>
+                    <p>Pincode: ${profile.pincode}</p>
+                </div>
+            `;
+        }
+
+        function closeProfile() {
+            const profileSection = document.querySelector('.profile-section');
+            profileSection.innerHTML = `
+                <h2>Welcome</h2>
+                <button id="viewProfile">View Profile</button>
+            `;
+
+            // Reattach event listeners
+            document.getElementById('viewProfile').addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/profile');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const profile = await response.json();
+                    displayProfile(profile);
+                } catch (error) {
+                    console.error('There was a problem with the fetch operation:', error);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

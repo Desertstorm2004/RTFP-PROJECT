@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Campus Selection System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fbf8f3;
+            color: #333;
+        }
+
+        header {
+            background-color: #274546;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #efeee5;
+        }
+
+        header nav {
+            margin-top: 20px;
+        }
+
+        header nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            background-color: #274546;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .menu-toggle:focus {
+            outline: none;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+
+        aside {
+            width: 25%;
+            background-color: #274546;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        aside .welcome-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        aside .clients img {
+            width: 45%;
+        }
+
+        aside .side-nav {
+            display: flex;
+            flex-direction: column;
+        }
+
+        aside .side-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #333;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        aside .side-nav a:hover {
+            background-color: #1ABC9C;
+        }
+
+        section.content {
+            width: 50%;
+            padding: 20px;
+            background-color: #efeee5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .search-section,
+        .profile-section {
+            margin-bottom: 20px;
+        }
+
+        .search-section h2,
+        .profile-section h2 {
+            color: #274546;
+        }
+
+        .search-section form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .search-section label,
+        .search-section select,
+        .search-section button {
+            flex: 1;
+            margin: 5px 0;
+        }
+
+        .search-section button {
+            background-color: #274546;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .search-section button:hover {
+            background-color: #1ABC9C;
+        }
+
+        .profile-section button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #274546;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .profile-section button:hover {
+            background-color: #1ABC9C;
+        }
+
+        .profile-details {
+            margin-top: 20px;
+        }
+
+        .profile-details p {
+            margin: 10px 0;
+        }
+
+        .profile-details a {
+            color: #232323;
+            text-decoration: none;
+        }
+
+        .job-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .job-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .jobs-section {
+            width: 25%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #efeee5;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            /* Initially hide the jobs section */
+        }
+
+        footer {
+            background-color: #274546;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            aside {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            section.content,
+            .jobs-section {
+                width: 100%;
+            }
+
+            header nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            header nav ul {
+                display: flex;
+                flex-direction: column;
+            }
+
+            header nav a {
+                margin: 10px 0;
+            }
+
+            .menu-toggle {
+                display: inline-block;
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 20px;
+            }
+
+            .menu-toggle.active+nav {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #274546;
+                flex-direction: column;
+            }
+
+            header nav {
+                display: none;
+            }
+
+            header nav ul {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            header nav a {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>College Campus Placement System</h1>
+        <button class="menu-toggle">Menu</button>
+        <nav>
+            <ul>
+                <!-- Add other navigation links here -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <div class="welcome-section">
+                <h2>Welcome to Campus Placement</h2>
+                <div class="clients">
+                    <p>Our Clients</p>
+                    <img src="./images/client.png" alt="Clients">
+                </div>
+            </div>
+            <nav class="side-nav">
+                <a href="home.html">HOME</a>
+                <a href="newjob.html">Add New Job</a>
+                <a href="#" id="viewJobs">View Posted Jobs</a>
+                <a href="about.html">ABOUT US</a>
+                <a href="contact.html">CONTACT US</a>
+                <a href="faculty.html">LogOut</a>
+            </nav>
+        </aside>
+
+        <section class="content">
+            <div class="search-section">
+                <h2>Find Students Here within a Second !!</h2>
+                <form id="searchForm">
+                    <label for="category">Branch</label>
+                    <select id="category">
+                        <option value="">SELECT</option>
+                        <option value="CSE">CSE</option>
+                        <option value="IT">IT</option>
+                        <option value="CSD">CSD</option>
+                        <option value="CS">CS</option>
+                        <option value="EEE">EEE</option>
+                        <option value="EIE">EIE</option>
+                        <option value="Mechanical">Mechanical</option>
+                        <option value="CIVIL">CIVIL</option>
+                        <option value="CSIT">CSIT</option>
+                    </select>
+
+                    <label for="skill">Skill:</label>
+                    <select id="skill">
+                        <option value="">SELECT</option>
+                        <option value="JAVA">JAVA</option>
+                        <option value="C">C</option>
+                        <option value="C++">C++</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="PYTHON">PYTHON</option>
+                        <option value="HTML">HTML</option>
+                        <option value=".NET">.NET</option>
+                        <option value="CSS">CSS</option>
+                        <option value="FullStack">Full Stack</option>
+                        <option value="MySQL">MySQL</option>
+                    </select>
+
+                    <label for="qualification">Qualification:</label>
+                    <select id="qualification">
+                        <option value="">SELECT</option>
+                        <option value="BTech">BTech</option>
+                        <option value="MTech">MTech</option>
+                    </select>
+
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+
+            <div class="profile-section">
+                <h2>Welcome</h2>
+                <!-- Student details will be displayed here -->
+            </div>
+        </section>
+
+        <div class="jobs-section" id="jobs-section">
+            <h2>Posted Jobs</h2>
+            <ul class="job-list" id="job-list">
+                <!-- Jobs will be listed here -->
+            </ul>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>All the Rights Reserved @Doli</p>
+    </footer>
+
+    <script>
+        document.getElementById('viewJobs').addEventListener('click', async () => {
+            const jobsSection = document.getElementById('jobs-section');
+            const jobList = document.getElementById('job-list');
+
+            try {
+                const response = await fetch('/viewjobs'); // Adjust the URL endpoint accordingly
+                const postedJobs = await response.json();
+                jobList.innerHTML = ''; // Clear previous job list
+
+                if (postedJobs.length === 0) {
+                    jobList.innerHTML = '<li>No posted jobs</li>';
+                } else {
+                    postedJobs.forEach(job => {
+                        const jobItem = document.createElement('li');
+                        jobItem.className = 'job-item';
+                        jobItem.innerHTML = `
+                            <strong>Company Name:</strong> ${job.companyName}<br>
+                            <strong>Job Title:</strong> ${job.role}<br>
+                            <strong>Location:</strong> ${job.jobLocation}<br>
+                            <strong>Salary:</strong> ${job.salary}<br>
+                            <strong>Description:</strong> ${job.description}
+                        `;
+                        jobList.appendChild(jobItem);
+                    });
+                }
+
+                // Toggle display of the jobs section
+                jobsSection.style.display = (jobsSection.style.display === 'none' || jobsSection.style.display === '') ? 'block' : 'none';
+            } catch (error) {
+                console.error('Failed to fetch posted jobs', error);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

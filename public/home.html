@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Campus Selection System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f2f2f2;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background: #006666;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background: #009999;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .content {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .sidebar,
+        .main {
+            padding: 20px;
+            background: #e6e6e6;
+            border-radius: 10px;
+        }
+
+        .sidebar {
+            width: 25%;
+            margin-right: 20px;
+        }
+
+        .main {
+            width: 75%;
+        }
+
+        .search-form {
+            margin-bottom: 20px;
+        }
+
+        .search-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .search-form select,
+        .search-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-form button {
+            width: 100%;
+            padding: 10px;
+            background: #006666;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .search-results {
+            margin-top: 20px;
+        }
+
+        .job-item,
+        .student-item {
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-item h3,
+        .student-item h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #006666;
+        }
+
+        .job-item p,
+        .student-item p {
+            margin: 5px 0;
+        }
+
+        .job-item a,
+        .student-item a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: #006666;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>College Campus Placement System</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="companyreg.html">NEW COMPANY</a></li>
+            <li><a href="studentreg.html">NEW STUDENT</a></li>
+            <li><a href="https://cvr.ac.in/home4/index.php/cvr-college-of-engineering">COLLEGE INFO</a></li>
+            <li><a href="about.html">ABOUT US</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="content">
+            <aside class="sidebar">
+                <form class="search-form" id="searchForm">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category">
+                        <option value="">Select Category</option>
+                        <option value="IT">IT</option>
+                        <option value="Mechanical">Mechanical</option>
+                        <option value="EC">EC</option>
+                        <option value="Auto">Auto</option>
+                        <option value="Civil">Civil</option>
+                        <option value="Electrical">Electrical</option>
+                    </select>
+                    <label for="skill">Skill:</label>
+                    <select id="skill" name="skill">
+                        <option value="">Select Skill</option>
+                        <option value=".NET">.NET</option>
+                        <option value="C++">C++</option>
+                        <option value="DBMS">DBMS</option>
+                    </select>
+                    <label for="qualification">Qualification:</label>
+                    <select id="qualification" name="qualification">
+                        <option value="">Select Qualification</option>
+                        <option value="MTech">MTech</option>
+                        <option value="BTech">BTech</option>
+                        <option value="Diploma">Diploma</option>
+                    </select>
+                    <div class="search-options">
+                        <input type="radio" id="search-company" name="search-option" value="company" checked>
+                        <label for="search-company">Search Company</label>
+                        <input type="radio" id="search-students" name="search-option" value="students">
+                        <label for="search-students">Search Students</label>
+                    </div>
+                    <button type="button" onclick="performSearch()">Search</button>
+                </form>
+            </aside>
+            <section class="main">
+                <div class="search-results" id="searchResults">
+                    <!-- Search results will appear here -->
+                </div>
+            </section>
+        </div>
+    </div>
+    <script>
+        async function performSearch() {
+            const category = document.getElementById('category').value;
+            const skill = document.getElementById('skill').value;
+            const qualification = document.getElementById('qualification').value;
+            const searchOption = document.querySelector('input[name="search-option"]:checked').value;
+
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            try {
+                const url = new URL(`/api/${searchOption === 'company' ? 'companies' : 'students'}`, window.location.origin);
+                const params = new URLSearchParams();
+
+                if (category) params.append('category', category);
+                if (skill) params.append('skill', skill);
+                if (qualification) params.append('qualification', qualification);
+
+                url.search = params.toString();
+
+                const response = await fetch(url);
+                const results = await response.json();
+                console.log(results)
+
+                results.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add(searchOption === 'company' ? 'job-item' : 'student-item');
+                    if (searchOption === 'company') {
+                        itemDiv.innerHTML = `
+                            <h3>Company Name: ${item.companyName}</h3>
+                            <p><strong>Role:</strong> ${item.role || ''}</p>
+                            <p><strong>Branch:</strong> ${item.branch || ''}</p>
+                            <p><strong>Qualification:</strong> ${item.qualification || ''}</p>
+                            <p><strong>Required Skill:</strong> ${item.requiredSkill || ''}</p>
+                            <p><strong>Extra Skill:</strong> ${item.extraSkill || ''}</p>
+                            <p><strong>Max Age:</strong> ${item.maxAge || ''}</p>
+                            <p><strong>Job Location:</strong> ${item.jobLocation || ''}</p>
+                            <p><strong>Salary:</strong> ${item.salary || ''}</p>
+                            <p><strong>Working Hour:</strong> ${item.workingHour || ''}</p>
+                            <p><strong>Last Apply Date:</strong> ${new Date(item.lastApplyDate).toLocaleDateString()}</p>
+                            <a href="#" onclick="applyJob('${item.companyName}')">Apply</a>
+                        `;
+                    } else {
+                        itemDiv.innerHTML = `
+                            <h3>Student Details:</h3>
+                            <p><strong>Roll No:</strong> ${item.rollNo || ''}</p>
+                            <p><strong>Skill:</strong> ${item.skill || ''}</p>
+                            <p><strong>Branch:</strong> ${item.branch || ''}</p>
+                            <p><strong>SGPA:</strong> ${item.sgpa || ''}</p>
+                            <p><strong>Additional Skills:</strong> ${item.additionalSkills || ''}</p>
+                            <p><strong>Semester:</strong> ${item.semester || ''}</p>
+                            <p><strong>Passing Year:</strong> ${item.passingYear || ''}</p>
+                        `;
+                    }
+                    resultsContainer.appendChild(itemDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                resultsContainer.innerHTML = '<p>Error fetching data. Please try again later.</p>';
+            }
+        }
+
+        function applyJob(companyName) {
+            alert(`You have successfully applied to ${companyName}`);
+        }
+    </script>
+</body>
+
+</html>

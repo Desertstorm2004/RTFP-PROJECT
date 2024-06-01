@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #efeee5;
+            color: #274546;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #274546;
+        }
+
+        .container form {
+            display: grid;
+            grid-gap: 15px;
+        }
+
+        .container input[type="text"],
+        .container input[type="number"],
+        .container input[type="file"],
+        .container select {
+            width: calc(100% - 22px); /* Adjusted to account for input padding and border */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 1rem;
+            color: #274546;
+        }
+
+        .container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #274546;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .container input[type="submit"]:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        @media screen and (min-width: 600px) {
+            .container {
+                width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Educational Details</h2>
+        <form action="/education" method="POST" id="Educationaldetails">
+            <input type="text" id="collegeName" name="collegeName" placeholder="College Name" required/>
+            <input type="text" id="rollNo" name="rollNo" placeholder="Roll No" required/>
+            <input type="text" id="semester" name="semester" placeholder="Semester" required/>
+            <input type="text" id="education" name="education" placeholder="Education" required/>
+            <input type="text" id="branch" name="branch" placeholder="Branch" required/>
+            <input type="number" id="passingYear" name="passingYear" placeholder="Passing Year" required/>
+            <input type="number" id="sgpa" step="0.01" name="sgpa" placeholder="SGPA" required/>
+            <input type="number" id="cgpa" step="0.01" name="cgpa" placeholder="CGPA" required/>
+            <input type="text" id="skill" name="skill" placeholder="Skill" required/>
+            <input type="text" id="additionalSkills" name="additionalSkills" placeholder="Additional Skills"/>
+            <input type="file" id="resume" name="resume" accept=".txt,.pdf,.doc,.docx" required/>
+            <input type="submit" value="Submit" id="submit"/>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+            const inputs = form.querySelectorAll('input, select');
+            const submitButton = form.querySelector('input[type="submit"]');
+
+            inputs.forEach(input => {
+                input.addEventListener('input', function () {
+                    const allFilled = [...inputs].every(input => input.value.trim() !== '');
+                    submitButton.disabled = !allFilled;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

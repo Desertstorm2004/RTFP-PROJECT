@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+        <div>
+            <h3>Users</h3>
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <!-- Add other user fields as necessary -->
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div>
+            <h3>Companies</h3>
+            <table id="companiesTable">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Contact Person</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <!-- Add other company fields as necessary -->
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("/api/details")
+                .then(response => response.json())
+                .then(data => {
+                    const usersTable = document.getElementById("usersTable").getElementsByTagName("tbody")[0];
+                    const companiesTable = document.getElementById("companiesTable").getElementsByTagName("tbody")[0];
+
+                    data.users.forEach(user => {
+                        const row = usersTable.insertRow();
+                        row.insertCell(0).innerText = user.firstName;
+                        row.insertCell(1).innerText = user.lastName;
+                        row.insertCell(2).innerText = user.username;
+                        row.insertCell(3).innerText = user.email;
+                        // Add other user fields as necessary
+                    });
+
+                    data.companies.forEach(company => {
+                        const row = companiesTable.insertRow();
+                        row.insertCell(0).innerText = company.companyName;
+                        row.insertCell(1).innerText = company.contactPersonName;
+                        row.insertCell(2).innerText = company.username;
+                        row.insertCell(3).innerText = company.email;
+                        // Add other company fields as necessary
+                    });
+                })
+                .catch(error => console.error("Error fetching details:", error));
+        });
+    </script>
+</body>
+</html>
